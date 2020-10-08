@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "634346007239",
+    "firebase_url": "https://chat-21fcd.firebaseio.com",
+    "project_id": "chat-21fcd",
+    "storage_bucket": "chat-21fcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634346007239:android:d54065851e86ae1ef4ece2",
+        "android_client_info": {
+          "package_name": "com.example.deepak_sharma_updates"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634346007239-bvrspl1tpthp2pino7qh2tf1uqiuvpla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADzN1fIi6Dk9dkWaHSFdJIOIzMAvrMjrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634346007239-bvrspl1tpthp2pino7qh2tf1uqiuvpla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
