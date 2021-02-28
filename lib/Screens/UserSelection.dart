@@ -40,17 +40,18 @@ class UserSelection extends StatelessWidget {
             },
             child: Container(
               height: 70.0,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [Color(0xFFff9966), Color(0xFFff5e62)])),
               width: MediaQuery.of(context).size.width - 20,
-              child: Card(
-                elevation: 5.0,
-                child: Center(
-                    child: Text(
-                  "Group",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                  ),
-                )),
-              ),
+              child: Center(
+                  child: Text(
+                "Group",
+                style: TextStyle(fontSize: 30.0, color: Colors.white),
+              )),
             ),
           ),
         ),
@@ -77,18 +78,25 @@ class UserSelection extends StatelessWidget {
                 ),
               );
             },
-            child: Container(
-              height: 70.0,
-              width: MediaQuery.of(context).size.width - 20,
-              child: Card(
-                elevation: 5.0,
-                child: Center(
-                    child: Text(
-                  "Mr. Deepak Sharma",
-                  style: TextStyle(
-                    fontSize: 25.0,
-                  ),
-                )),
+            child: Hero(
+              tag: "appbar",
+              child: Material(
+                color: Colors.transparent,
+                child: Container(
+                  height: 70.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [Color(0xFFff9966), Color(0xFFff5e62)])),
+                  width: MediaQuery.of(context).size.width - 20,
+                  child: Center(
+                      child: Text(
+                    "Mr. Deepak Sharma",
+                    style: TextStyle(fontSize: 25.0, color: Colors.white),
+                  )),
+                ),
               ),
             ),
           ),

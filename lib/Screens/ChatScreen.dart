@@ -22,13 +22,26 @@ class _MyChatState extends State<MyChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Deepak Sharma Updates',
-          style: TextStyle(
-            color: Colors.teal,
+        elevation: 0.0,
+        title: Hero(
+          tag: "appbar",
+          child: Material(
+            color: Colors.transparent,
+            child: const Text(
+              'Deepak Sharma Updates',
+              style: TextStyle(
+                color: Color(0xFFff5e62),
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
-          textAlign: TextAlign.center,
         ),
+        actions: [
+          Image.asset(
+            "assets/images/logo.png",
+            width: 50.0,
+          )
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -56,9 +69,11 @@ class _MyChatState extends State<MyChatScreen> {
                                 dateTime: getFormattedDate(
                                     messages.data['timestamp']),
                                 msg: messages.data["msg"],
-                                direction: widget.isAdmin ? (
-                                    messages.data["side"] == "left" ? "right": "left"
-                                ) : messages.data["side"],
+                                direction: widget.isAdmin
+                                    ? (messages.data["side"] == "left"
+                                        ? "right"
+                                        : "left")
+                                    : messages.data["side"],
                               );
                             },
                           );
@@ -144,15 +159,19 @@ class _MyChatState extends State<MyChatScreen> {
       );
     } else {
       _textController.clear();
-      if(widget.path == "broadcast") {
-        Firestore.instance
-            .collection("broadcast")
-            .add({"timestamp": Timestamp.fromDate(DateTime.now()), "side": "left", "msg": msg});
+      if (widget.path == "broadcast") {
+        Firestore.instance.collection("broadcast").add({
+          "timestamp": Timestamp.fromDate(DateTime.now()),
+          "side": "left",
+          "msg": msg
+        });
         return;
       }
-      Firestore.instance
-          .collection("chats/${widget.path}/msgs")
-          .add({"timestamp": Timestamp.fromDate(DateTime.now()), "side": widget.isAdmin ? "left" : "right", "msg": msg});
+      Firestore.instance.collection("chats/${widget.path}/msgs").add({
+        "timestamp": Timestamp.fromDate(DateTime.now()),
+        "side": widget.isAdmin ? "left" : "right",
+        "msg": msg
+      });
     }
   }
 

@@ -22,6 +22,10 @@ class LoginScreen extends StatelessWidget {
             Container(
               child: Column(
                 children: [
+                  Image.asset(
+                    "assets/images/logo.png",
+                    width: 200,
+                  ),
                   Text(
                     "Student Login",
                     style: TextStyle(
@@ -32,28 +36,53 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.0,
                   ),
-                  TextField(
-                    controller: _sCtrlName,
-                    decoration: InputDecoration(
-                      hintText: "Enter Your Name",
-                      focusedBorder: UnderlineInputBorder(),
+                  Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                            colors: [Color(0xFFff9966), Color(0xFFff5e62)])),
+                    child: TextField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _sCtrlName,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(color: Colors.white),
+                        hintText: "Enter Your Name",
+                        // focusedBorder: UnderlineInputBorder(),
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  TextField(
-                    controller: _sCtrlPhone,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: "Enter Your Phone",
-                      focusedBorder: UnderlineInputBorder(),
+                  Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                            colors: [Color(0xFFff9966), Color(0xFFff5e62)])),
+                    child: TextField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _sCtrlPhone,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Phone",
+                          hintStyle: TextStyle(color: Colors.white),
+                          border: InputBorder.none),
                     ),
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
                   RaisedButton(
+                    color: Color(0xFFff5e62),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
                     onPressed: () => _stuLogin(context),
                     child: Text("Login"),
                   ),
@@ -83,17 +112,28 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  TextField(
-                    controller: _fCtrl,
-                    decoration: InputDecoration(
-                      hintText: "Enter the Code",
-                      focusedBorder: UnderlineInputBorder(),
+                  Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                            colors: [Color(0xFFff9966), Color(0xFFff5e62)])),
+                    child: TextField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _fCtrl,
+                      decoration: InputDecoration(
+                          hintStyle: TextStyle(color: Colors.white),
+                          hintText: "Enter the Code",
+                          border: InputBorder.none),
                     ),
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
                   RaisedButton(
+                    color: Color(0xFFff5e62),
                     onPressed: () => _facLogin(context),
                     child: Text("Login"),
                   ),
@@ -156,14 +196,20 @@ class LoginScreen extends StatelessWidget {
         MaterialPageRoute(
           builder: (ctx) => Scaffold(
             appBar: AppBar(
-              title: const Text(
-                'Deepak Sharma Updates',
-                style: TextStyle(
-                  color: Colors.teal,
+                elevation: 0.0,
+                title: const Text(
+                  'Deepak Sharma Updates',
+                  style: TextStyle(
+                    color: Color(0xFFff5e62),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+                actions: [
+                  Image.asset(
+                    "assets/images/logo.png",
+                    width: 60.0,
+                  )
+                ]),
             body: UserSelection(
               user: phone,
             ),
@@ -193,14 +239,20 @@ class LoginScreen extends StatelessWidget {
         MaterialPageRoute(
           builder: (ctx) => Scaffold(
             appBar: AppBar(
-              title: const Text(
-                'Deepak Sharma Updates',
-                style: TextStyle(
-                  color: Colors.teal,
+                elevation: 0.0,
+                title: const Text(
+                  'Deepak Sharma Updates',
+                  style: TextStyle(
+                    color: Color(0xFFff5e62),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+                actions: [
+                  Image.asset(
+                    "assets/images/logo.png",
+                    width: 60.0,
+                  )
+                ]),
             body: UserSelection(
               user: "dSharma@admin7",
             ),
