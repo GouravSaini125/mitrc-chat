@@ -1,12 +1,10 @@
 import 'dart:core';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deepak_sharma_updates/Screens/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Screens/ChatScreen.dart';
 import 'Screens/UserSelection.dart';
 
 void main() => runApp(MyApp());
@@ -33,29 +31,33 @@ class _MyAppState extends State<MyApp> {
         primaryColorDark: Colors.white,
         fontFamily: 'Gamja Flower',
       ),
-      home: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
+      home: Scaffold(
+        appBar: AppBar(
+            elevation: 0.0,
             title: const Text(
               'Deepak Sharma Updates',
               style: TextStyle(
-                color: Colors.teal,
+                color: Color(0xFFff5e62),
               ),
               textAlign: TextAlign.center,
             ),
-          ),
-          body: FutureBuilder(
-            future: getScreen(),
-            builder: (ctx, snapshot) {
-              if (snapshot.hasData) {
-                return snapshot.data;
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          ),
+            actions: [
+              Image.asset(
+                "assets/images/logo.png",
+                width: 60.0,
+              )
+            ]),
+        body: FutureBuilder(
+          future: getScreen(),
+          builder: (ctx, snapshot) {
+            if (snapshot.hasData) {
+              return snapshot.data;
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ),
       ),
     );

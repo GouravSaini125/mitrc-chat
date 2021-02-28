@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deepak_sharma_updates/Screens/ChatScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSelection extends StatelessWidget {
   final String user;
@@ -40,16 +42,37 @@ class UserSelection extends StatelessWidget {
             },
             child: Container(
               height: 70.0,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      List: <Color>[Color(0xFFff9966), Color(0xFFff5e62)])),
               width: MediaQuery.of(context).size.width - 20,
-              child: Card(
-                elevation: 5.0,
-                child: Center(
-                    child: Text(
-                  "Group",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                  ),
-                )),
+              child: Center(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "Group",
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    FutureBuilder(
+                      future: getBubble("broadcast"),
+                      builder: (ctx, snapshot) {
+                        if (snapshot.hasData)
+                          return snapshot.data;
+                        else
+                          return Container();
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -57,6 +80,49 @@ class UserSelection extends StatelessWidget {
         ...getCards(context),
       ],
     );
+  }
+
+  Future<Widget> getBubble(path) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var ts = Timestamp.fromDate(DateTime.parse(prefs.getString("timestamp")));
+
+    var n = 0;
+    print(path);
+    if (path == "broadcast") {
+      var a = await Firestore.instance
+          .collection("broadcast")
+          .where('timestamp', isGreaterThanOrEqualTo: ts)
+          .getDocuments();
+      n = a.documents.length;
+      print(a);
+    } else {
+      var a = await Firestore.instance
+          .collection("chats/$path/msgs")
+          .where('timestamp', isGreaterThanOrEqualTo: ts)
+          .getDocuments();
+      n = a.documents.length;
+    }
+
+    return n == 0
+        ? Container()
+        : Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: Container(
+              height: 30.0,
+              width: 20.0,
+              decoration:
+                  BoxDecoration(color: Colors.teal, shape: BoxShape.circle),
+              child: Center(
+                child: Text(
+                  "$n",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          );
   }
 
   List<Widget> getCards(context) {
@@ -77,18 +143,43 @@ class UserSelection extends StatelessWidget {
                 ),
               );
             },
-            child: Container(
-              height: 70.0,
-              width: MediaQuery.of(context).size.width - 20,
-              child: Card(
-                elevation: 5.0,
-                child: Center(
-                    child: Text(
-                  "Mr. Deepak Sharma",
-                  style: TextStyle(
-                    fontSize: 25.0,
+            child: Hero(
+              tag: "appbar",
+              child: Material(
+                color: Colors.transparent,
+                child: Container(
+                  height: 70.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          List: <Color>[Color(0xFFff9966), Color(0xFFff5e62)])),
+                  width: MediaQuery.of(context).size.width - 20,
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Mr. Deepak Sharma",
+                            textAlign: TextAlign.center,
+                            style:
+                                TextStyle(fontSize: 25.0, color: Colors.white),
+                          ),
+                        ),
+                        FutureBuilder(
+                          future: getBubble(user),
+                          builder: (ctx, snapshot) {
+                            if (snapshot.hasData)
+                              return snapshot.data;
+                            else
+                              return Container();
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                )),
+                ),
               ),
             ),
           ),
@@ -129,17 +220,41 @@ class UserSelection extends StatelessWidget {
                           );
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              gradient: LinearGradient(
+                                  begin: Alignment.bottomLeft,
+                                  end: Alignment.topRight,
+                                  List: <Color>[
+                                    Color(0xFFff9966),
+                                    Color(0xFFff5e62)
+                                  ])),
                           height: 70.0,
                           width: MediaQuery.of(context).size.width - 20,
-                          child: Card(
-                            elevation: 5.0,
-                            child: Center(
-                                child: Text(
-                              "${users.documentID}\t - ${users.data["name"]}",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                              ),
-                            )),
+                          child: Center(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "${users.documentID}\t - ${users.data["name"]}",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                FutureBuilder(
+                                  future: getBubble(users.documentID),
+                                  builder: (ctx, snapshot) {
+                                    if (snapshot.hasData)
+                                      return snapshot.data;
+                                    else
+                                      return Container();
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

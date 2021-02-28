@@ -47,7 +47,7 @@ class Message extends StatelessWidget {
                           ),
                           alignment: Alignment.bottomLeft,
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
+                          child: SelectableText(
                             msg,
                             style: TextStyle(
                               fontFamily: 'Gamja Flower',
@@ -126,7 +126,7 @@ class Message extends StatelessWidget {
                           ),
                           alignment: Alignment.bottomRight,
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
+                          child: SelectableText(
                             msg,
                             style: TextStyle(
                               fontFamily: 'Gamja Flower',
